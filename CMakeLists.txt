@@ -34,6 +34,7 @@ if(ANDROID)
     mainwindow.cpp
     mainwindow.hpp
     mainwindow.ui
+    main_resources.qrc
     ${TS_FILES}
   )
 else()
@@ -42,6 +43,7 @@ else()
     mainwindow.cpp
     mainwindow.hpp
     mainwindow.ui
+    main_resources.qrc
     ${TS_FILES}
   )
 endif()

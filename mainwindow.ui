@@ -57,35 +57,13 @@
           <pointsize>30</pointsize>
          </font>
         </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
        </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="button_down">
-          <property name="text">
-           <string>down</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="button_edit">
-          <property name="text">
-           <string>edit</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="button_up">
-          <property name="text">
-           <string>up</string>
-          </property>
-          <property name="icon">
-           <iconset theme="up"/>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
       <item>
        <widget class="QPushButton" name="button_auswuefeln">

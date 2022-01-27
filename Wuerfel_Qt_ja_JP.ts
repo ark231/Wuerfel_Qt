@@ -14,7 +14,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="76"/>
+        <location filename="mainwindow.ui" line="82"/>
         <source>auswürfeln</source>
         <translation type="unfinished"></translation>
     </message>

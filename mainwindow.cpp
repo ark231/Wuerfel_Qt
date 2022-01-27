@@ -16,7 +16,7 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::on_button_add_choice_clicked() {
     QString new_choice = QInputDialog::getText(nullptr, tr("enter choice"), tr("new choice:"), QLineEdit::Normal);
     auto new_choice_item = new QListWidgetItem(new_choice);
-    new_choice_item->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable);
+    new_choice_item->setFlags(Qt::ItemIsEditable /* | Qt::ItemIsSelectable*/ | Qt::ItemIsEnabled);
     this->ui->list_choices->addItem(new_choice_item);
 }
 
@@ -33,5 +33,12 @@ void MainWindow::on_button_auswuefeln_clicked() {
         this->ui->label_result->setText(choosen_item->text());
     } else {
         this->ui->label_result->setText("error: invalid number. please try again");
+    }
+}
+void MainWindow::on_list_choices_itemClicked(QListWidgetItem *item) { this->ui->list_choices->editItem(item); }
+
+void MainWindow::on_list_choices_itemChanged(QListWidgetItem *item) {
+    if (item->text() == "") {
+        delete item;
     }
 }

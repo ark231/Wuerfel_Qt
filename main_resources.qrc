@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/res/img">
+        <file alias="uparrow.svg">resources/images/arrow.svg</file>
+        <file alias="app_icon.png">resources/images/Wuerfel.png</file>
+    </qresource>
+</RCC>

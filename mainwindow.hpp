@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
+#include <QDir>
 #include <QListWidgetItem>
 #include <QMainWindow>
 #include <random>
@@ -27,10 +28,21 @@ class MainWindow : public QMainWindow {
 
     void on_list_choices_itemChanged(QListWidgetItem *item);
 
+    void on_actionopen_triggered();
+
+    void on_actionsave_triggered();
+
+    void on_actionclear_all_triggered();
+
+    void on_actionremove_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     using randomEngine = std::default_random_engine;
     randomEngine rand_engine;
+    QDir template_dir;
+    QString template_path;
+    QFile template_file;
 };
 #endif  // MAINWINDOW_HPP

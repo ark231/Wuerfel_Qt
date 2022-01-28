@@ -111,8 +111,44 @@
      <height>28</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuutils">
+    <property name="title">
+     <string>utils</string>
+    </property>
+    <widget class="QMenu" name="menutemplate">
+     <property name="title">
+      <string>template</string>
+     </property>
+     <addaction name="actionopen"/>
+     <addaction name="actionsave"/>
+     <addaction name="actionremove"/>
+    </widget>
+    <addaction name="menutemplate"/>
+    <addaction name="actionclear_all"/>
+   </widget>
+   <addaction name="menuutils"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionopen">
+   <property name="text">
+    <string>open</string>
+   </property>
+  </action>
+  <action name="actionsave">
+   <property name="text">
+    <string>save</string>
+   </property>
+  </action>
+  <action name="actionclear_all">
+   <property name="text">
+    <string>clear all</string>
+   </property>
+  </action>
+  <action name="actionremove">
+   <property name="text">
+    <string>remove</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

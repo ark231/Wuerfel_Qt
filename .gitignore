@@ -74,3 +74,10 @@ Thumbs.db
 CMakeLists.user
 compile_commands.json
 .clang-format
+
+#android build files
+/android/*
+!/android/AndroidManifest.xml
+!/android/res/
+
+/resources/images/Wuerfel_*.png

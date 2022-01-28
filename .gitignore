@@ -71,7 +71,7 @@ Thumbs.db
 *.dll
 *.exe
 
-CMakeLists.user
+CMakeLists.txt.user
 compile_commands.json
 .clang-format
 

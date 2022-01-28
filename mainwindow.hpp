@@ -36,10 +36,14 @@ class MainWindow : public QMainWindow {
 
     void on_actionremove_triggered();
 
-private:
+    void on_actionrandgen_mode_triggered(bool checked);
+
+    void on_combo_randgen_type_currentTextChanged(const QString &arg1);
+
+   private:
     Ui::MainWindow *ui;
 
-    using randomEngine = std::default_random_engine;
+    using randomEngine = std::mt19937;
     randomEngine rand_engine;
     QDir template_dir;
     QString template_path;

@@ -9,13 +9,28 @@
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include <QStandardPaths>
+#include <array>
 
 #include "./ui_mainwindow.h"
+namespace Wuerfel {
+enum class Mode {
+    CHOICES = 0,
+    RANDGEN = 1,
+};
+enum class RandgenType {
+    INT = 0,
+    DOUBLE = 1,
+};
+}  // namespace Wuerfel
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     std::random_device seed_generator;
     this->rand_engine = randomEngine(seed_generator());
+
+    ui->stacked_modes->setCurrentIndex(static_cast<int>(Wuerfel::Mode::CHOICES));
+    ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::INT));
+
     auto data_dirname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir data_dir(data_dirname);
     if (not data_dir.exists()) {
@@ -58,23 +73,47 @@ void MainWindow::on_button_add_choice_clicked() {
 }
 
 void MainWindow::on_button_auswuefeln_clicked() {
-    QListWidgetItem *choosen_item = nullptr;
-    auto num_choices = this->ui->list_choices->count();
-    if (num_choices == 0) {
-        return;  // choosing nothing from nothing results nothing
-    }
-    std::uniform_int_distribution<> dist(0, num_choices - 1);
-    auto choosen_idx = dist(this->rand_engine);
-    choosen_item = this->ui->list_choices->item(choosen_idx);
-    if (choosen_item) {
-        this->ui->label_result->setText(choosen_item->text());
-    } else {
-        QMessageBox::warning(nullptr, tr("invalid number error"), tr("error: invalid number. please try again"));
+    switch (ui->stacked_modes->currentIndex()) {
+        case static_cast<int>(Wuerfel::Mode::CHOICES): {
+            QListWidgetItem *choosen_item = nullptr;
+            auto num_choices = this->ui->list_choices->count();
+            if (num_choices == 0) {
+                return;  // choosing nothing from nothing results nothing
+            }
+            std::uniform_int_distribution<> dist(0, num_choices - 1);
+            auto choosen_idx = dist(this->rand_engine);
+            choosen_item = this->ui->list_choices->item(choosen_idx);
+            if (choosen_item) {
+                this->ui->label_result->setText(choosen_item->text());
+            } else {
+                QMessageBox::warning(nullptr, tr("invalid number error"),
+                                     tr("error: invalid number. please try again"));
+            }
+        } break;
+        case static_cast<int>(Wuerfel::Mode::RANDGEN): {
+            switch (ui->stacked_types->currentIndex()) {
+                case static_cast<int>(Wuerfel::RandgenType::INT): {
+                    auto max = ui->spinbox_int_max->value();
+                    auto min = ui->spinbox_int_min->value();
+                    std::uniform_int_distribution<int> dist(min, max);
+                    ui->label_result->setText(QString::number(dist(rand_engine)));
+                } break;
+                case static_cast<int>(Wuerfel::RandgenType::DOUBLE): {
+                    auto max = ui->spinbox_double_max->value();
+                    auto min = ui->spinbox_double_min->value();
+                    std::uniform_real_distribution<double> dist(min, max);
+                    ui->label_result->setText(QString::number(dist(rand_engine)));
+                } break;
+            }
+        } break;
     }
 }
 void MainWindow::on_list_choices_itemClicked(QListWidgetItem *item) { this->ui->list_choices->editItem(item); }
 
 void MainWindow::on_list_choices_itemChanged(QListWidgetItem *item) {
+    if (ui->actionrandgen_mode->isChecked()) {
+        return;
+    }
     if (item->text() == "") {
         delete item;
     }
@@ -164,4 +203,20 @@ void MainWindow::on_actionremove_triggered() {
     }
     template_file.flush();
     template_file.seek(0);
+}
+void MainWindow::on_actionrandgen_mode_triggered(bool checked) {
+    ui->menutemplate->setEnabled(not checked);
+    ui->actionclear_all->setEnabled(not checked);
+    if (checked) {
+        ui->stacked_modes->setCurrentIndex(static_cast<int>(Wuerfel::Mode::RANDGEN));
+    } else {
+        ui->stacked_modes->setCurrentIndex(static_cast<int>(Wuerfel::Mode::CHOICES));
+    }
+}
+void MainWindow::on_combo_randgen_type_currentTextChanged(const QString &arg1) {
+    if (arg1 == "int") {
+        ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::INT));
+    } else if (arg1 == "double") {
+        ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::DOUBLE));
+    }
 }

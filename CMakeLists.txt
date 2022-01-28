@@ -52,7 +52,7 @@ endif()
 
 target_link_libraries(Wuerfel_Qt PRIVATE Qt5::Widgets)
 set_target_properties(Wuerfel_Qt PROPERTIES
-    QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android"
+    QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
 )
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

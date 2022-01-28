@@ -19,7 +19,7 @@ enum class Mode {
 };
 enum class RandgenType {
     INT = 0,
-    DOUBLE = 1,
+    REAL = 1,
 };
 }  // namespace Wuerfel
 
@@ -98,7 +98,7 @@ void MainWindow::on_button_auswuefeln_clicked() {
                     std::uniform_int_distribution<int> dist(min, max);
                     ui->label_result->setText(QString::number(dist(rand_engine)));
                 } break;
-                case static_cast<int>(Wuerfel::RandgenType::DOUBLE): {
+                case static_cast<int>(Wuerfel::RandgenType::REAL): {
                     auto max = ui->spinbox_double_max->value();
                     auto min = ui->spinbox_double_min->value();
                     std::uniform_real_distribution<double> dist(min, max);
@@ -214,9 +214,9 @@ void MainWindow::on_actionrandgen_mode_triggered(bool checked) {
     }
 }
 void MainWindow::on_combo_randgen_type_currentTextChanged(const QString &arg1) {
-    if (arg1 == "int") {
+    if (arg1 == tr("int")) {
         ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::INT));
-    } else if (arg1 == "double") {
-        ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::DOUBLE));
+    } else if (arg1 == tr("real")) {
+        ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::REAL));
     }
 }

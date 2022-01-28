@@ -120,7 +120,7 @@
               </item>
               <item>
                <property name="text">
-                <string>double</string>
+                <string>real</string>
                </property>
               </item>
              </widget>

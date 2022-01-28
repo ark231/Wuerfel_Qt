@@ -4,4 +4,10 @@
     <qresource prefix="/res/text">
         <file>templates.json</file>
     </qresource>
+    <qresource prefix="/translations">
+        <file alias="trans.qm"></file>
+    </qresource>
+    <qresource prefix="/translations" lang="ja">
+        <file alias="trans.qm">resources/translations/Wuerfel_Qt_ja.qm</file>
+    </qresource>
 </RCC>

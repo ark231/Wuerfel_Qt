@@ -2,6 +2,8 @@
 
 ## Android向けランダムピッカーアプリ
 
+[english](README.md)
+
 ### 使い方
 
 #### モード

@@ -8,6 +8,7 @@ you can change mode by tapping menu->randgen mode check box.
 1. push "add choice" button
 2. enter new choice
 3. after adding all choices, push "aufwürfeln" button
+4. you can edit/delete choices. By emptying the string of a choice, you can delete that choice.
 ##### rangen mode
 1. select int/real
 2. enter min and max value

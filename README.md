@@ -1,5 +1,6 @@
 # Wuerfel_Qt
 ## randompicker application for Android
+[日本語](./README_ja-JP.md)
 ### Usage
 #### modes
 This application has two modes. One is randompicker mode and the other is randgen mode (i.e. random number generator mode).  

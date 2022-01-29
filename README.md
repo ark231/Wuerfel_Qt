@@ -17,6 +17,6 @@ you can change mode by tapping menu->randgen mode check box.
 #### templates
 you can save/load/delete templates.
 
-###License
+### License
 this software is licensed under MIT License.
 read LICENSE for detail.

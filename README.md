@@ -16,3 +16,7 @@ you can change mode by tapping menu->randgen mode check box.
 3. push "aufwürfeln" button
 #### templates
 you can save/load/delete templates.
+
+###License
+this software is licensed under MIT License.
+read LICENSE for detail.

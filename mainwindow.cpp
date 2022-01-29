@@ -31,7 +31,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->stacked_modes->setCurrentIndex(static_cast<int>(Wuerfel::Mode::CHOICES));
     ui->stacked_types->setCurrentIndex(static_cast<int>(Wuerfel::RandgenType::INT));
 
-    auto data_dirname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    auto data_dirnames = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+    QString data_dirname;
+    for (const auto &dirname : data_dirnames) {
+        if (dirname.contains("Android")) {
+            data_dirname = dirname;
+        }
+    }
+    // auto data_dirname = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir data_dir(data_dirname);
     if (not data_dir.exists()) {
         if (not data_dir.mkpath(data_dirname)) {
@@ -40,25 +47,30 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             this->ui->menutemplate->setEnabled(false);
         }
     }
+
     this->template_dir = data_dir;
     this->template_path = data_dir.filePath("templates.json");
     this->template_file.setFileName(template_path);
     if (not template_file.exists()) {
-        QFile::copy(":/res/text/templates.json", template_path);
+        if (not QFile::copy(":/res/text/templates.json", template_path)) {
+            QMessageBox::warning(nullptr, tr("cp failed"),
+                                 tr("error: couldn't copy template file \"%1\".").arg(template_path));
+        }
     }
-    if (template_file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadUser |
-                                     QFileDevice::WriteUser)) {
-        if (template_file.permissions() !=
-            (QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadUser | QFileDevice::WriteUser)) {
+    auto permission = QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadUser | QFileDevice::WriteUser;
+    if (template_file.setPermissions(permission)) {
+        if ((template_file.permissions() & 0xff00) != permission) {  //オーナーとユーザーのとこだけ取り出して確認
             QMessageBox::warning(nullptr, tr("chmod failed"),
                                  tr("error: couldn't change permissions of \"%1\".").arg(template_path));
             this->ui->menutemplate->setEnabled(false);
+            return;
         }
     }
     if (not template_file.open(QIODevice::ReadWrite)) {
         QMessageBox::warning(nullptr, tr("template file open error"),
                              tr("error: couldn't open template file %1").arg(template_path));
         this->ui->menutemplate->setEnabled(false);
+        return;
     }
     template_file.seek(0);
 }

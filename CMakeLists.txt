@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Wuerfel_Qt LANGUAGES CXX)
+project(Wuerfel_Qt VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 

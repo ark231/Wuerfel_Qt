@@ -1,4 +1,4 @@
-# Wuerfel_Qt
+# Wuerfel_
 ## randompicker application for Android
 [日本語](./README_ja-JP.md)
 ### Usage

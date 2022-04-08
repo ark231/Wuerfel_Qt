@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Wuerfel_Qt VERSION 1.0.0 LANGUAGES CXX)
+project(Wuerfel_mobile VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -28,10 +28,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
-set(TS_FILES Wuerfel_Qt_ja_JP.ts)
+set(TS_FILES Wuerfel_mobile_ja_JP.ts)
 
 if(ANDROID)
-  add_library(Wuerfel_Qt SHARED
+  add_library(Wuerfel_mobile SHARED
     main.cpp
     mainwindow.cpp
     mainwindow.hpp
@@ -40,7 +40,7 @@ if(ANDROID)
     ${TS_FILES}
   )
 else()
-  add_executable(Wuerfel_Qt
+  add_executable(Wuerfel_mobile
     main.cpp
     mainwindow.cpp
     mainwindow.hpp
@@ -50,8 +50,8 @@ else()
   )
 endif()
 
-target_link_libraries(Wuerfel_Qt PRIVATE Qt5::Widgets)
-set_target_properties(Wuerfel_Qt PROPERTIES
+target_link_libraries(Wuerfel_mobile PRIVATE Qt5::Widgets)
+set_target_properties(Wuerfel_mobile PROPERTIES
     QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
 )
 

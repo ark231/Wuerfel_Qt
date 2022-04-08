@@ -8,6 +8,6 @@
         <file alias="trans.qm"></file>
     </qresource>
     <qresource prefix="/translations" lang="ja">
-        <file alias="trans.qm">resources/translations/Wuerfel_Qt_ja.qm</file>
+        <file alias="trans.qm">resources/translations/Wuerfel_mobile_ja.qm</file>
     </qresource>
 </RCC>

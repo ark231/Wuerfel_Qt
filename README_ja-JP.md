@@ -1,4 +1,4 @@
-# Wuerfel_Qt
+# Wuerfel_mobile
 
 ## Android向けランダムピッカーアプリ
 

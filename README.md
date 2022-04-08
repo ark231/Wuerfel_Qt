@@ -1,4 +1,4 @@
-# Wuerfel_
+# Wuerfel_mobile
 ## randompicker application for Android
 [日本語](./README_ja-JP.md)
 ### Usage
